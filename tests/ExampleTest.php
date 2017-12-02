@@ -5,12 +5,16 @@ namespace Tests;
 use JoeyDojo\Example;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @covers \JoeyDojo\Example
+ */
 class ExampleTest extends TestCase
 {
     /**
      * A basic test example.
      *
-     * @return void
+     * @covers \JoeyDojo\Example::run()
+
      */
     public function testBasicTest()
     {
