@@ -14,13 +14,16 @@ class SibalaOutput
             case 1:
                 return 'same color';
                 break;
-            case 2:
-                break;
             default:
                 $result = array_count_values([$one, $two, $three, $four]);
                 $result = $this->array_sort($result);
                 $keys = array_keys($result);
-                return ($keys[0] + $keys[1]) . ' points';
+                $numbers = ($keys[0] + $keys[1]);
+                if ($numbers == 3) {
+                    return 'bg';
+                } else {
+                    return $numbers . ' points';
+                }
                 break;
         }
     }

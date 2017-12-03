@@ -66,6 +66,18 @@ class SibalaOutputTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function test_bg_()
+    {
+        // arrange
+        $expected = 'bg';
+
+        // act
+        $actual = $this->sibala->calculator(1 , 2, 1, 1);
+
+        // assert
+        $this->assertEquals($expected, $actual);
+    }
+
     public function noPointsDataProvider()
     {
         return [
