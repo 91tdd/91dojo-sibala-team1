@@ -16,14 +16,14 @@ class SibalaOutputTest extends TestCase
      * @covers \JoeyDojo\Example::run()
 
      */
-    public function testBasicTest()
+    public function test_no_points()
     {
         // arrange
         $target = new SibalaOutput();
-        $expected = 'Hello, world';
+        $expected = 'no points';
 
         // act
-        $actual = $target->run();
+        $actual = $target->calculator(1, 2, 3, 4);
 
         // assert
         $this->assertEquals($expected, $actual);

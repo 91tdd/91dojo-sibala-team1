@@ -4,8 +4,7 @@ namespace JoeyDojo;
 
 class SibalaOutput
 {
-    public function run()
+    public function calculator($one , $two, $three, $four)
     {
-        return 'Hello, world';
     }
 }
