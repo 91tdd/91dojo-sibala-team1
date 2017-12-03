@@ -10,14 +10,33 @@ use PHPUnit\Framework\TestCase;
  */
 class SibalaOutputTest extends TestCase
 {
-    public function test_no_points()
+    /**
+     * @var SibalaOutput
+     */
+    private $sibala;
+
+    protected function setUp()
+    {
+        $this->sibala = new SibalaOutput();
+    }
+
+    /**
+     * 測試 no points
+     *
+     * @param $one
+     * @param $two
+     * @param $three
+     * @param $four
+     * @dataProvider noPointsDataProvider
+     * @covers \JoeyDojo\Example::run()
+     */
+    public function test_no_points($one, $two, $three, $four)
     {
         // arrange
-        $target = new SibalaOutput();
         $expected = 'no points';
 
         // act
-        $actual = $target->calculator(1, 2, 3, 4);
+        $actual = $this->sibala->calculator($one, $two, $three, $four);
 
         // assert
         $this->assertEquals($expected, $actual);
@@ -43,9 +62,21 @@ class SibalaOutputTest extends TestCase
         $expected = '4 points';
 
         // act
-        $actual = $target->calculator(4, 1, 3   , 4);
+        $actual = $target->calculator(4, 1, 3, 4);
 
         // assert
         $this->assertEquals($expected, $actual);
+    }
+
+    public function noPointsDataProvider()
+    {
+        return [
+            [1, 2, 3, 4],
+            [2, 5, 1, 6],
+            [3, 4, 1, 5],
+            [4, 1, 2, 6],
+            [5, 3, 4, 1],
+            [6, 4, 3, 1],
+        ];
     }
 }
