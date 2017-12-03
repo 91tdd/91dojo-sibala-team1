@@ -32,13 +32,39 @@ class SibalaCompareTest extends TestCase
             [
                 [
                     'name' => 'A',
-                    'number' => 2,
+                    'number' => 8,
                     'state' => 2
                 ],
                 [
                     'name' => 'B',
-                    'number' => 2,
-                    'state' => 0
+                    'number' => 7,
+                    'state' => 2
+                ],
+                ['A', 'B'],
+            ],
+            [
+                [
+                    'name' => 'A',
+                    'number' => 5,
+                    'state' => 2
+                ],
+                [
+                    'name' => 'B',
+                    'number' => 7,
+                    'state' => 2
+                ],
+                ['B', 'A'],
+            ],
+            [
+                [
+                    'name' => 'A',
+                    'number' => 7,
+                    'state' => 2
+                ],
+                [
+                    'name' => 'B',
+                    'number' => 7,
+                    'state' => 2
                 ],
                 ['B', 'A'],
             ]

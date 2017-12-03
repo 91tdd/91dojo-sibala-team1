@@ -16,7 +16,7 @@ class SibalaCompare
 
     public function setSibala(array $sibala): SibalaCompare
     {
-        if (array_has($sibala, self::$validSibalaInput))
+        if (!array_has($sibala, self::$validSibalaInput))
         {
             throw new UnexpectedValueException(
                 'Missing index of sibala input: ' .
@@ -28,8 +28,17 @@ class SibalaCompare
         return $this;
     }
 
-    public function compare()
+    public function compare(): array
     {
-        return [];
+        usort($this->sibalaSet, [$this, 'compareNumber']);
+        return array_pluck($this->sibalaSet, 'name');
+    }
+
+    public function compareNumber(array $a, array $b): bool
+    {
+        if (array_get($a, 'state') === self::STATE_WITH_NUMBER
+            && array_get($a, 'state') === self::STATE_WITH_NUMBER) {
+            return array_get($a, 'number') <= array_get($b, 'number');
+        }
     }
 }
