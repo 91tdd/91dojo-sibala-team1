@@ -2,7 +2,7 @@
 
 namespace JoeyDojo;
 
-class Example
+class SibalaOutput
 {
     public function run()
     {

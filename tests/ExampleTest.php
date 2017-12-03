@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use JoeyDojo\Example;
+use JoeyDojo\SibalaOutput;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,7 +19,7 @@ class ExampleTest extends TestCase
     public function testBasicTest()
     {
         // arrange
-        $target = new Example();
+        $target = new SibalaOutput();
         $expected = 'Hello, world';
 
         // act
