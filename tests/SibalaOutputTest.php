@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @covers \JoeyDojo\Example
  */
-class ExampleTest extends TestCase
+class SibalaOutputTest extends TestCase
 {
     /**
      * A basic test example.
