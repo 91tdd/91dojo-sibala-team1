@@ -10,12 +10,6 @@ use PHPUnit\Framework\TestCase;
  */
 class SibalaOutputTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @covers \JoeyDojo\Example::run()
-
-     */
     public function test_no_points()
     {
         // arrange
@@ -28,4 +22,18 @@ class SibalaOutputTest extends TestCase
         // assert
         $this->assertEquals($expected, $actual);
     }
+
+    public function test_same_color()
+    {
+        // arrange
+        $target = new SibalaOutput();
+        $expected = 'same color';
+
+        // act
+        $actual = $target->calculator(1, 1, 1, 1);
+
+        // assert
+        $this->assertEquals($expected, $actual);
+    }
+
 }
