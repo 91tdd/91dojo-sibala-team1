@@ -34,11 +34,24 @@ class SibalaCompare
         return array_pluck($this->sibalaSet, 'name');
     }
 
-    public function compareNumber(array $a, array $b): bool
+    public function compareNumber(array $a, array $b): int
     {
         if (array_get($a, 'state') === self::STATE_WITH_NUMBER
-            && array_get($a, 'state') === self::STATE_WITH_NUMBER) {
-            return array_get($a, 'number') <= array_get($b, 'number');
+            && array_get($b, 'state') === self::STATE_WITH_NUMBER) {
+            return array_get($b, 'number') <=> array_get($a, 'number');
+        } elseif (array_get($a, 'state') === self::STATE_SAME_COLOR
+            && array_get($b, 'state') === self::STATE_SAME_COLOR) {
+            return $this->fillSameColor(array_get($b, 'number')) <=> $this->fillSameColor(array_get($a, 'number'));
         }
+    }
+
+    private function fillSameColor(int $a): int
+    {
+        if ($a === 1) {
+            $a += 100;
+        } elseif ($a === 4) {
+            $a += 50;
+        }
+        return $a;
     }
 }

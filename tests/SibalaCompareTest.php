@@ -16,17 +16,17 @@ class SibalaCompareTest extends TestCase
     }
 
     /**
-     * @dataProvider sibalaProvider
+     * @dataProvider sibalaWithNumberProvider
      */
-    public function testCompare($sibalaA, $sibalaB, $expected)
+    public function testCompareWithNumber($sibalaA, $sibalaB, $expected)
     {
-        $this->assertSame(
+        $this->assertEquals(
             $expected,
             $this->instance->setSibala($sibalaA)->setSibala($sibalaB)->compare()
         );
     }
 
-    public function sibalaProvider()
+    public function sibalaWithNumberProvider()
     {
         return [
             [
@@ -66,7 +66,37 @@ class SibalaCompareTest extends TestCase
                     'number' => 7,
                     'state' => 2
                 ],
-                ['B', 'A'],
+                ['A', 'B'],
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider sibalaWithSameColorProvider
+     */
+    public function testCompareWithSameColor($sibalaA, $sibalaB, $expected)
+    {
+        $this->assertEquals(
+            $expected,
+            $this->instance->setSibala($sibalaA)->setSibala($sibalaB)->compare()
+        );
+    }
+
+    public function sibalaWithSameColorProvider()
+    {
+        return [
+            [
+                [
+                    'name' => 'A',
+                    'number' => 1,
+                    'state' => 0
+                ],
+                [
+                    'name' => 'B',
+                    'number' => 4,
+                    'state' => 0
+                ],
+                ['A', 'B'],
             ]
         ];
     }
