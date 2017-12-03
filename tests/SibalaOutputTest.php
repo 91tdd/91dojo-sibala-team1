@@ -36,4 +36,16 @@ class SibalaOutputTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
+    public function test_four_points()
+    {
+        // arrange
+        $target = new SibalaOutput();
+        $expected = '4 points';
+
+        // act
+        $actual = $target->calculator(4, 1, 3   , 4);
+
+        // assert
+        $this->assertEquals($expected, $actual);
+    }
 }
