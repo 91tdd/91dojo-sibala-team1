@@ -45,11 +45,10 @@ class SibalaOutputTest extends TestCase
     public function test_same_color()
     {
         // arrange
-        $target = new SibalaOutput();
         $expected = 'same color';
 
         // act
-        $actual = $target->calculator(1, 1, 1, 1);
+        $actual = $this->sibala->calculator(1, 1, 1, 1);
 
         // assert
         $this->assertEquals($expected, $actual);
@@ -58,11 +57,10 @@ class SibalaOutputTest extends TestCase
     public function test_four_points()
     {
         // arrange
-        $target = new SibalaOutput();
         $expected = '4 points';
 
         // act
-        $actual = $target->calculator(4, 1, 3, 4);
+        $actual = $this->sibala->calculator(4, 1, 3, 4);
 
         // assert
         $this->assertEquals($expected, $actual);
