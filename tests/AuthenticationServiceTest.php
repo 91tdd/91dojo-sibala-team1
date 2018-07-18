@@ -21,7 +21,17 @@ class AuthenticationServiceTest extends TestCase
      */
     public function test_is_valid()
     {
-        $target = new AuthenticationService(new FakeProfile(), new FakeToken());
+        $fakeProfile = m::mock(Profile::class);
+        $fakeProfile->shouldReceive('getPassword')
+            ->with('joey')
+            ->andReturn('91');
+
+        $fakeToken = m::mock(Token::class);
+        $fakeToken->shouldReceive('getRandom')
+            ->withAnyArgs()
+            ->andReturn('000000');
+
+        $target = new AuthenticationService($fakeProfile, $fakeToken);
         $actual = $target->isValid('joey', '91000000');
         $this->assertTrue($actual);
     }
@@ -29,7 +39,6 @@ class AuthenticationServiceTest extends TestCase
 
 class FakeProfile implements Profile
 {
-
     public function getPassword($account)
     {
         if ($account == 'joey') {
