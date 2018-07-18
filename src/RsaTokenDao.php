@@ -8,7 +8,7 @@
 
 namespace JoeyDojo;
 
-class RsaTokenDao
+class RsaTokenDao implements Token
 {
     public function getRandom($account)
     {

@@ -19,11 +19,31 @@ class AuthenticationServiceTest extends TestCase
     /**
      * @test
      */
-    public function is_valid()
+    public function test_is_valid()
     {
-        $target = new AuthenticationService();
+        $target = new AuthenticationService(new FakeProfile(), new FakeToken());
         $actual = $target->isValid('joey', '91000000');
-        //always failed
         $this->assertTrue($actual);
+    }
+}
+
+class FakeProfile implements Profile
+{
+
+    public function getPassword($account)
+    {
+        if ($account == 'joey') {
+            return '91';
+        }
+        return '';
+    }
+}
+
+class FakeToken implements Token
+{
+
+    public function getRandom($account)
+    {
+        return '000000';
     }
 }

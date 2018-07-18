@@ -8,7 +8,7 @@
 
 namespace JoeyDojo;
 
-class ProfileDao
+class ProfileDao implements Profile
 {
     public function getPassword($account)
     {
