@@ -41,7 +41,7 @@ class AuthenticationService
         if ($isValid) {
             return true;
         } else {
-            $message = sprintf('account:%s try to login failed', $account);
+            $message = sprintf('account: %s try to login failed', $account);
             $this->logger->save($message);
             return false;
         }
