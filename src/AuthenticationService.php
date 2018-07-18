@@ -13,16 +13,18 @@ class AuthenticationService
 {
     private $profile;
     private $token;
+    private $logger;
 
     /**
      * AuthenticationService constructor.
      * @param $profile
      * @param $token
      */
-    public function __construct(Profile $profile = null, Token $token = null)
+    public function __construct(Profile $profile = null, Token $token = null, Logger $logger = null)
     {
         $this->profile = $profile ?: new ProfileDao();
         $this->token = $token ?: new RsaTokenDao();
+        $this->logger = $logger ?: new SystemLog();
     }
 
     public function isValid($account, $password)
@@ -39,6 +41,8 @@ class AuthenticationService
         if ($isValid) {
             return true;
         } else {
+            $message = sprintf('account:%s try to login failed', $account);
+            $this->logger->save($message);
             return false;
         }
     }
