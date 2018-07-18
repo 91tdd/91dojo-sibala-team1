@@ -31,18 +31,11 @@ class AuthenticationServiceTest extends TestCase
      */
     public function log_when_invalid()
     {
-        $this->givenPassword('joey', '91');
+        $this->givenPassword('' . 'joey' . '', '91');
         $this->givenRandom('123456');
+        $this->wrongPassword();
 
-        $isValid = $this->target->isValid('joey', 'wrong password');
-        $this->assertFalse($isValid);
-
-        $this->logger->shouldHaveReceived('save')
-            ->once()
-            ->with(m::on(function ($message) {
-                return strpos($message, 'joey') !== false;
-            }));
-
+        $this->shouldLog('joey');
     }
 
     use MockeryPHPUnitIntegration;
@@ -85,6 +78,23 @@ class AuthenticationServiceTest extends TestCase
     protected function shouldBeValid($account, $passCode)
     {
         $this->assertTrue($this->target->isValid($account, $passCode));
+    }
+
+    /**
+     * @param $account
+     */
+    protected function shouldLog($account)
+    {
+        $this->logger->shouldHaveReceived('save')
+            ->once()
+            ->with(m::on(function ($message) use ($account) {
+                return strpos($message, $account) !== false;
+            }));
+    }
+
+    protected function wrongPassword()
+    {
+        $this->target->isValid('joey', 'wrong password');
     }
 }
 
