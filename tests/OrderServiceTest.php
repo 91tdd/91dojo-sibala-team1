@@ -15,31 +15,27 @@ use PHPUnit\Framework\TestCase;
 
 class OrderServiceTest extends TestCase
 {
+    private $orderService;
+    private $spyBookDao;
     use MockeryPHPUnitIntegration;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->orderService = new OrderServiceForTest();
+    }
 
     /**
      * @test
      */
     public function sync_3_orders_only_2_book_orders()
     {
-        $orderService = new OrderServiceForTest();
-        $order1 = $this->makeOrder('Book');
-        $order2 = $this->makeOrder('CD');
-        $order3 = $this->makeOrder('Book');
+        $this->givenOrders(array('Book', 'CD', 'Book'));
+        $this->givenBookDao();
 
-        $orders = array($order1, $order2, $order3);
-        $orderService->setOrders($orders);
+        $this->orderService->syncBookOrders();
 
-        $mockBookDao = m::spy(BookDao::class);
-        $orderService->setBookdao($mockBookDao);
-
-        $orderService->syncBookOrders();
-
-        $mockBookDao->shouldHaveReceived('insert')
-            ->twice()
-            ->with(m::on(function (Order $o) {
-                return $o->type === 'Book';
-            }));
+        $this->bookDaoShouldInsertTimes(2);
     }
 
     protected function makeOrder($type)
@@ -47,6 +43,41 @@ class OrderServiceTest extends TestCase
         $order = new Order();
         $order->type = $type;
         return $order;
+    }
+
+    /**
+     * @return array
+     */
+    private function makeOrders($types)
+    {
+        $orders = array();
+        foreach ($types as $type) {
+            $orders[] = $this->makeOrder($type);
+        }
+        return $orders;
+    }
+
+    /**
+     * @param $types
+     */
+    private function givenOrders($types)
+    {
+        $this->orderService->setOrders($this->makeOrders($types));
+    }
+
+    private function givenBookDao()
+    {
+        $this->spyBookDao = m::spy(BookDao::class);
+        $this->orderService->setBookdao($this->spyBookDao);
+    }
+
+    private function bookDaoShouldInsertTimes($times)
+    {
+        $this->spyBookDao->shouldHaveReceived('insert')
+            ->times($times)
+            ->with(m::on(function (Order $o) {
+                return $o->type === 'Book';
+            }));
     }
 }
 
